@@ -1,0 +1,22 @@
+.d {
+  &-block {
+    display: block !important;
+  }
+
+  &-flex {
+    display: flex !important;
+  }
+
+  &-none {
+    display: none !important;
+  }
+}
+
+.w {
+  &-50 {
+    width: 50%;
+  }
+  &-100 {
+    width: 100%;
+  }
+}

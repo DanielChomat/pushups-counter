@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap');
+
+html, body {
+  font-size: 62.5%;
+
+  background-color: rebeccapurple;
+}
+
+body {
+  margin: 0;
+  font-family: 'Yanone Kaffeesatz', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-size: 2.2rem;
+  //font-size: clamp(1.6rem, -1.2500rem + 7.9167vw, 5.4rem);
+}
+
+* {
+  font-family: 'Yanone Kaffeesatz', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+button {
+  cursor: pointer;
+}

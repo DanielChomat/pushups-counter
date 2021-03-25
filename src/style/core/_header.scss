@@ -1,0 +1,26 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 0 1.6rem;
+  text-align: center;
+
+  .app-name, .page-title {
+    font-weight: 600;
+    line-height: 1;
+
+    letter-spacing: 5px;
+  }
+
+  .app-name {
+    font-size: 5.6rem;
+
+  }
+
+  .page-title {
+    font-size: 4.8rem;
+
+    color: $badass;
+  }
+}
