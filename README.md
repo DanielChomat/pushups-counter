@@ -25,10 +25,14 @@ Right now, I'm still working on the basic features, such as tracking push-ups, d
 
 But further on I would really like to move with this project forward to some dashboard of accomplishments, habits, tasks and so much more, that would be useful for me.
 
-Such as:
+Goals for further development: 
 - See the progress of a project in % (be it a book, web app, home renovations, etc.)
 - Statistics of read articles on Pocket via API
-- Habit tracking (daily/weekly/monthly) 
+- Habit tracking (daily/weekly/monthly)
+
+Coding goals:
+- Rewriting the app to Typescript
+- Rewriting the example Netlify functions
 
 You can see all the progress, tasks and everything else in the "Projects" section of this repo on GitHub.
 
