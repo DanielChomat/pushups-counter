@@ -1,5 +1,5 @@
-#Pushups Counter
-####A personal project to further my development skills 
+# Pushups Counter
+### A personal project to further my development skills 
 
 This app is aimed for me to get better at web development as well as fulfill his needs. 
 
