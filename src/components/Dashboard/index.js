@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {PushupsContext, StatsContext} from "../Contexts/PushupsContext";
 import api from "../../utils/api";
 import isLocalHost from "../../utils/isLocalHost";
+import DoingPushups from "../Animations/DoingPushupsIcon";
 import sortByDate from "../../utils/sortByDate";
 
 
@@ -183,7 +184,7 @@ const Dashboard = () => {
     return (
         <div className={"grid grid--dashboard"}>
             <section>
-                <h3>Stats</h3>
+                <h3>Stats <DoingPushups /></h3>
                 <table className={"table table--responsive"}>
                     <tbody>
                     <tr>
