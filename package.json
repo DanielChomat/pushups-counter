@@ -8,6 +8,8 @@
     "date-fns": "^2.19.0",
     "faunadb": "^2.13.1",
     "markdown-magic": "^1.0.0",
+    "moment": "^2.29.1",
+    "netlify-identity-widget": "^1.9.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
