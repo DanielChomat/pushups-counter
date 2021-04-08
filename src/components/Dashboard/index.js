@@ -5,6 +5,10 @@ import isLocalHost from "../../utils/isLocalHost";
 import DoingPushups from "../Animations/DoingPushupsIcon";
 import sortByDate from "../../utils/sortByDate";
 
+import moment from 'moment';
+import {MOMENT_DAY_SLUG, MOMENT_MONTH_SLUG, MOMENT_WEEK_SLUG} from "../../constants";
+
+
 
 function removeOptimisticPushup(pushups) {
     // return all 'real' pushups
@@ -46,6 +50,43 @@ const getTodayStuff = (stuff) => {
     }, {total: 0, sessions: 0});
 }
 
+const getTotalDonePer = (stuff, diffEntity) => {
+    if (stuff.length === 0) {
+        return false;
+    }
+
+    const firstDay = moment(stuff[0].data.created_at);
+    const lastDay = moment(stuff.slice(-1).pop().data.created_at);
+
+    const difference = lastDay.diff(firstDay, diffEntity);
+
+    return difference !== 0 ? difference : 1;
+}
+
+const getDailyStuff = (stuff) => {
+    if (stuff.length === 0) {
+        return 0;
+    }
+
+    return Math.round(getStuffSum(stuff) / getTotalDonePer(stuff, MOMENT_DAY_SLUG));
+}
+
+const getWeeklyStuff = (stuff) => {
+    if (stuff.length === 0) {
+        return 0;
+    }
+
+    return Math.round(getStuffSum(stuff) / getTotalDonePer(stuff, MOMENT_WEEK_SLUG));
+}
+
+const getMonthlyStuff = (stuff) => {
+    if (stuff.length === 0) {
+        return 0;
+    }
+
+    return Math.round(getStuffSum(stuff) / getTotalDonePer(stuff, MOMENT_MONTH_SLUG));
+}
+
 const Dashboard = () => {
 
     const [pushups, setPushups] = useContext(PushupsContext);
@@ -65,7 +106,17 @@ const Dashboard = () => {
                 }
                 return false
             }
-            setPushups(resultPushups);
+
+            if (resultPushups.length === 0) {
+                return false;
+            }
+
+            const timeStampKey = 'ts'
+            const orderBy = 'asc' // or `desc`
+            const sortOrder = sortByDate(timeStampKey, orderBy)
+            const pushupsByDate = resultPushups.sort(sortOrder)
+
+            setPushups(pushupsByDate);
         }
 
         fetchData();
@@ -75,12 +126,15 @@ const Dashboard = () => {
         setStats({
             type: "UPDATE_ALL",
             payload: {
-                totalNumberPushups: getStuffSum(pushups),
-                totalNumberSessions: pushups.length,
+                totalNumberPushups: getStuffSum(pushups) ?? 0,
+                totalNumberSessions: pushups.length ?? 0,
+                averagePerDay: getDailyStuff(pushups) ?? 0,
+                averagePerWeek: getWeeklyStuff(pushups) ?? 0,
+                averagePerMonth: getMonthlyStuff(pushups) ?? 0,
                 today: {
-                    numberPushups: getTodayStuff(pushups).total,
-                    numberSessions: getTodayStuff(pushups).sessions,
-                }
+                    numberPushups: getTodayStuff(pushups).total ?? 0,
+                    numberSessions: getTodayStuff(pushups).sessions ?? 0,
+                },
             }
         })
     }, [pushups, setStats]);
@@ -158,12 +212,7 @@ const Dashboard = () => {
             return null
         }
 
-        const timeStampKey = 'ts'
-        const orderBy = 'desc' // or `asc`
-        const sortOrder = sortByDate(timeStampKey, orderBy)
-        const pushupsByDate = pushups.sort(sortOrder)
-
-        return pushupsByDate.map((pushup, i) => {
+        return pushups.map((pushup, i) => {
             const {data} = pushup
             const id = getPushupId(pushup)
 
@@ -173,9 +222,13 @@ const Dashboard = () => {
                 <tr key={id}>
                     <td>{formattedDate}, {formattedTime}</td>
                     <td>{data?.count}</td>
-                    <td><span onClick={() => {
-                        removePushup(id);
-                    }}>Remove</span></td>
+                    <td>
+                        <button onClick={(e) => {
+                            e.preventDefault();
+                            removePushup(id);
+                        }}>Remove
+                        </button>
+                    </td>
                 </tr>
             )
         })
@@ -189,19 +242,31 @@ const Dashboard = () => {
                     <tbody>
                     <tr>
                         <td>Owerall:</td>
-                        <td>{stats.totalNumberPushups}</td>
+                        <td>{stats.totalNumberPushups ?? 0}</td>
                     </tr>
                     <tr>
                         <td>Total sessions:</td>
-                        <td>{stats.totalNumberSessions}</td>
+                        <td>{stats.totalNumberSessions ?? 0}</td>
                     </tr>
                     <tr>
                         <td>Today total number:</td>
-                        <td>{stats.today.numberPushups}</td>
+                        <td>{stats.today.numberPushups ?? 0}</td>
                     </tr>
                     <tr>
                         <td>Today total sessions:</td>
-                        <td>{stats.today.numberSessions}</td>
+                        <td>{stats.today.numberSessions ?? 0}</td>
+                    </tr>
+                    <tr>
+                        <td>Average per Day:</td>
+                        <td>{stats.averagePerDay ?? 0}</td>
+                    </tr>
+                    <tr>
+                        <td>Average per Week:</td>
+                        <td>{stats.averagePerWeek ?? 0}</td>
+                    </tr>
+                    <tr>
+                        <td>Average per Month:</td>
+                        <td>{stats.averagePerMonth ?? 0}</td>
                     </tr>
                     </tbody>
                 </table>

@@ -5,11 +5,12 @@ const defaultValues = {
     totalNumberPushups: 0,
     totalNumberSessions: 0,
     averagePerDay: 0,
+    averagePerWeek: 0,
     averagePerMonth: 0,
     today: {
         numberPushups: 0,
         numberSessions: 0,
-    }
+    },
 }
 
 const defaultValuesFnc = () => (defaultValues)
@@ -24,10 +25,13 @@ const statsReducer = (state, action) => {
                 ...state,
                 totalNumberPushups: action.payload.totalNumberPushups,
                 totalNumberSessions: action.payload.totalNumberSessions,
+                averagePerDay: action.payload.averagePerDay,
+                averagePerWeek: action.payload.averagePerWeek,
+                averagePerMonth: action.payload.averagePerMonth,
                 today: {
                     numberPushups: action.payload.today.numberPushups,
                     numberSessions: action.payload.today.numberSessions,
-                }
+                },
             }
         default :
             return state;
