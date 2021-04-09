@@ -33,7 +33,7 @@ const App = () => {
 
     return (
         <ContextProvider>
-            <Header isDashboard/>
+            <Header isDashboard user={userState}/>
             <main>
                 {netlifyIdentity.currentUser() && <Dashboard/>}
             </main>
