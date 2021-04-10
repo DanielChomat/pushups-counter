@@ -192,11 +192,8 @@ const Dashboard = () => {
             <DashboardStats/>
             <section>
                 <h3>Start a session!</h3>
-
             </section>
-            <section>
-                <h3>Graphs!</h3>
-            </section>
+            <DashboardGraphs/>
             <section>
                 <h3>Quick Add!</h3>
                 <div className={"btn-group"}>
