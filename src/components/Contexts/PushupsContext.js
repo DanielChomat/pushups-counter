@@ -45,11 +45,11 @@ const StatsContext = React.createContext([defaultValues, () => {
 
 const ContextProvider = ({children}) => {
     const [pushups, setPushups] = useState([]);
-    const [state, dispatch] = useReducer(statsReducer, defaultValues, defaultValuesFnc);
+    const [stats, setStats] = useReducer(statsReducer, defaultValues, defaultValuesFnc);
 
     return (
-        <PushupsContext.Provider value={[pushups, setPushups]}>
-            <StatsContext.Provider value={[state, dispatch]}>
+        <PushupsContext.Provider value={{pushups, setPushups}}>
+            <StatsContext.Provider value={{stats, setStats}}>
                 {children}
             </StatsContext.Provider>
         </PushupsContext.Provider>

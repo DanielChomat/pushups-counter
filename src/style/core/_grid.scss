@@ -8,6 +8,14 @@
     color: $rebecca;
 
     border-radius: 1.4rem;
+
+    &.col-span-2 {
+      grid-column-end: span 2;
+
+      @media only screen and (max-width: 567px) {
+        grid-column-end: span 1;
+      }
+    }
   }
 
 
@@ -16,5 +24,7 @@
     grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
 
     grid-gap: 2rem;
+
+    grid-auto-flow: dense;
   }
 }

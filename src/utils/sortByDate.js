@@ -1,11 +1,11 @@
-export default function sortDate(dateKey, order) {
-  return function (a, b) {
-    const timeA = new Date(a[dateKey]).getTime()
-    const timeB = new Date(b[dateKey]).getTime()
-    if (order === 'asc') {
-      return timeA - timeB
+export default function sortDate(order) {
+    return function (a, b) {
+        const timeA = new Date(a.data.created_at).getTime()
+        const timeB = new Date(b.data.created_at).getTime()
+        if (order === 'asc') {
+            return timeA - timeB
+        }
+        // default 'desc' descending order
+        return timeB - timeA
     }
-    // default 'desc' descending order
-    return timeB - timeA
-  }
 }
