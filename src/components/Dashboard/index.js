@@ -191,7 +191,7 @@ const Dashboard = () => {
         <div className={"grid grid--dashboard"}>
             <DashboardStats/>
             <section>
-                <h3>Start a session!</h3>
+                <h3>Log a session!</h3>
             </section>
             <DashboardGraphs/>
             <section>
