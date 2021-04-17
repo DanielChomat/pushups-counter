@@ -5,8 +5,8 @@ import api from "../../utils/api";
 import isLocalHost from "../../utils/isLocalHost";
 import sortByDate from "../../utils/sortByDate";
 import {getDailyStuff, getMonthlyStuff, getStuffSum, getTodayStuff, getWeeklyStuff,} from "../../helpers";
-import DashboardStats from "../DashboardStats";
-import DashboardGraphs from "../DashboardGraphs";
+
+import {DashboardGraphs, DashboardProgress, DashboardStats} from "../DashboardComponents";
 
 function removeOptimisticStuff(stuff) {
     // return all 'real' stuff
@@ -41,6 +41,10 @@ const Dashboard = () => {
                         "FaunaDB key is not unauthorized. Verify the key `FAUNADB_SERVER_SECRET` set in Netlify enviroment variables is correct"
                     );
                 }
+                return false;
+            }
+
+            if (resultPushups.code === "ENOTFOUND") {
                 return false;
             }
 
@@ -194,6 +198,7 @@ const Dashboard = () => {
                 <h3>Log a session!</h3>
             </section>
             <DashboardGraphs/>
+            <DashboardProgress/>
             <section>
                 <h3>Quick Add!</h3>
                 <div className={"btn-group"}>

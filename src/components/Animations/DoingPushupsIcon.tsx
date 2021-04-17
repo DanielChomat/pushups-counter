@@ -9,7 +9,6 @@ export default () => {
     const [animation, setAnimation] = useState(false);
 
     useInterval(() => {
-        // Your custom logic here
         setAnimation(!animation);
     }, 1000);
 
